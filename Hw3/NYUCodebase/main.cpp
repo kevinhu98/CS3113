@@ -137,7 +137,6 @@ void GameOverScreen() {
 }
 
 void Render() {
-	
 	switch (mode) {
 	case STATE_TITLE_SCREEN:
 		DrawTitleScreen();

@@ -159,8 +159,6 @@ int main(int argc, char *argv[])
 			ball.velocity_x = -ball.velocity_x;
 		}
 
-	
-
 		glClear(GL_COLOR_BUFFER_BIT);
 		//red if left wins, green if right wins
 		program.SetColor(1, 1, 1, 1);

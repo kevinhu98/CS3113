@@ -19,6 +19,13 @@
 #define FIXED_TIMESTEP 0.0166666f
 #define MAX_TIMESTEPS 6
 
+/*To-do List Priority: 
+1. Enemys currently do not disappear
+2. Enemys need to shoot back 
+3. Shoot Timer so that player cannot hold space
+4. Possible increasing difficulty
+*/
+
 SDL_Window* displayWindow;
 
 void DrawText(ShaderProgram *program, Matrix modelMatrix, int fontTexture, std::string text, float size, float spacing, float x, float y) {

@@ -137,6 +137,7 @@ int main(int argc, char *argv[])
 		
 		SDL_GL_SwapWindow(displayWindow);
 	}
+
 	SDL_Quit();
 	return 0;
 }

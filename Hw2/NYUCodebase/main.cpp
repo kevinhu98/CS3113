@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 
 	Entity leftPaddle(0.1, 0.5, -3.3, 0, 0, 3);
 	Entity rightPaddle(0.1, 0.5, 3.3, 0, 0, 3);
-	Entity ball(0.25, 0.25, 0, 0, 1, 1);
+	Entity ball(0.25, 0.25, 0, 0, 2, 2);
 	const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
 	SDL_Event event;
@@ -102,6 +102,16 @@ int main(int argc, char *argv[])
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 				done = true;
+			}
+			// "R" to restart, space to change direction of ball
+			else if (event.type == SDL_KEYDOWN) {
+				if (event.key.keysym.scancode == SDL_SCANCODE_R) {
+					ball.x_pos = 0;
+					ball.y_pos = 0;
+				}
+				else if (event.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+					ball.velocity_x *= -1;
+				}
 			}
 		}
 		//possible paddle inputs
@@ -117,10 +127,7 @@ int main(int argc, char *argv[])
 		else if (keys[SDL_SCANCODE_DOWN]) {
 			rightPaddle.y_pos -= elapsed * rightPaddle.velocity_y;
 		}
-		if (keys[SDL_SCANCODE_SPACE]) {
-			ball.velocity_x += 0.5;
-			ball.velocity_y += 0.5;
-		}
+		
 		//keeps paddles from leaving screen
 		if (leftPaddle.y_pos > 1.75) {
 			leftPaddle.y_pos = 1.75;

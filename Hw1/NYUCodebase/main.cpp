@@ -113,14 +113,14 @@ int main(int argc, char *argv[])
 		//triangle
 		modelMatrix.Identity();
 		untextured.SetModelMatrix(modelMatrix);
-		float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5 };
+		float vertices[] = { -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 1.0 };
 		glVertexAttribPointer(untextured.positionAttribute, 2, GL_FLOAT, false, 0, vertices);
 		glEnableVertexAttribArray(untextured.positionAttribute);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glDisableVertexAttribArray(untextured.positionAttribute);
 
 		glUseProgram(program.programID);
-
+		
 		//frog + sonic
 		modelMatrix.Identity();
 		modelMatrix.Translate(x1_position, 0, 0);

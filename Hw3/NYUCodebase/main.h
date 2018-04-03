@@ -13,5 +13,6 @@ extern bool done;
 extern const Uint8* keys;
 extern ShaderProgram program;
 extern Matrix modelMatrix;
+extern GameMode mode;
 
 #endif // !main_h

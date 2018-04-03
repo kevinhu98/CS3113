@@ -14,7 +14,6 @@ void GameState::Initialize(SheetSprite* playerSprite, SheetSprite* bulletSprite,
 	player->width = 1.0f;
 	player->height = 1.0f;
 	player->x_velocity = 1.0f;
-
 	player->alive = true;
 	player->setSprite(playerSprite);
 
@@ -36,7 +35,7 @@ void GameState::Initialize(SheetSprite* playerSprite, SheetSprite* bulletSprite,
 	for (int i = 0; i < enemies.size(); ++i) {
 		enemies[i].type = ENEMY;
 		enemies[i].alive = true;
-		enemies[i].x_velocity = 0;
+		enemies[i].x_velocity = 10;
 		enemies[i].y_velocity = 0;
 		enemies[i].setSprite(enemySprite);
 		if (invader_x > 2.2) {
@@ -94,9 +93,9 @@ void GameState::Update(float elapsed) {
 		bullets[i].update(elapsed);
 
 		for (int j = 0; j < enemies.size(); j++) {
-			if (bullets[i].Collision(enemies[j]) == true) {
+			if (enemies[j].Collision(bullets[i]) == true) {
 				enemies[j].die();
-				bullets[i].y_pos += 100;
+				bullets[i].y_pos = 100000;
 			}
 		}
 	}
@@ -112,6 +111,12 @@ void GameState::Update(float elapsed) {
 				enemies[j].update(elapsed);
 			}
 			break;
+		}
+	}
+	//defeat
+	for (size_t i = 0; i < enemies.size(); i++) {
+		if (enemies[i].alive == true && enemies[i].y_pos < -3.55) {
+			mode = STATE_GAME_OVER;
 		}
 	}
 }

@@ -20,10 +20,11 @@
 #define MAX_TIMESTEPS 6
 
 /*To-do List Priority: 
-1. Enemys currently do not disappear
+1. Enemies do not render after game over screen
 2. Enemys need to shoot back 
 3. Shoot Timer so that player cannot hold space
-4. Possible increasing difficulty
+4. Once all enemies are dead, reset
+
 */
 
 SDL_Window* displayWindow;
@@ -208,7 +209,6 @@ int main(int argc, char *argv[])
 	float lastFrameTicks = 0.0f;
 	float accumulator = 0.0f;
 
-	//gameState.player->render(program, modelMatrix);
 	while (!done) {
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;

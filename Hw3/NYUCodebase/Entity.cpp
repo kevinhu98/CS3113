@@ -47,10 +47,11 @@ void Entity::update(float elapsed) {
 }
 
 bool Entity::Collision(Entity& bullet) {
-	if (this->alive == false) {
+	//does not work if i do this->alive instead of bullet
+	if (this->alive == false ) {
 		return false;
 	}
-	if (y_pos - height / 2 > bullet.y_pos + bullet.height / 2) {
+	else if (y_pos - height / 2 > bullet.y_pos + bullet.height / 2) {
 		return false;
 	}
 	else if (y_pos + height / 2 < bullet.y_pos - bullet.height / 2) {

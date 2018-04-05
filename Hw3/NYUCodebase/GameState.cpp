@@ -29,18 +29,19 @@ void GameState::Initialize(SheetSprite* playerSprite, SheetSprite* bulletSprite,
 	}
 
 	//Position enemies
-	//Problem drawing enemy number 15
+
 	float invader_x = -2.1f;
 	float invader_y = 1.6f;
 	for (int i = 0; i < enemies.size(); ++i) {
 		enemies[i].type = ENEMY;
 		enemies[i].alive = true;
-		enemies[i].x_velocity = 10;
+		enemies[i].x_velocity = 0.5;
 		enemies[i].y_velocity = 0;
 		enemies[i].setSprite(enemySprite);
 		if (invader_x > 2.2) {
-			invader_x = -2.1;
-			invader_y -= 0.5;
+			invader_x = -2.1f;
+			invader_y -= 0.4;
+			
 		}
 		enemies[i].x_pos = invader_x;
 		enemies[i].y_pos = invader_y;
@@ -134,3 +135,27 @@ void GameState::Render() {
 		bullets[i].render(program, modelMatrix);
 	}
 }
+
+void GameState::reset() {
+	player->x_pos = 0.0f;
+	player->y_pos = -1.7f;
+	player->alive = true;
+
+	//Reposition enemies
+
+	float invader_x = -2.1f;
+	float invader_y = 1.6f;
+	for (int i = 0; i < enemies.size(); ++i) {
+		enemies[i].alive = true;
+		if (invader_x > 2.2) {
+			invader_x = -2.1f;
+			invader_y -= 0.4;
+
+		}
+		enemies[i].x_pos = invader_x;
+		enemies[i].y_pos = invader_y;
+		invader_x += 0.5f;
+
+	}
+}
+

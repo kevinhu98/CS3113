@@ -12,6 +12,7 @@ public:
 	void Update(float elapsed);
 	void ProcessInput();
 	void ShootBullet();
+	void reset();
 	
 	Entity* player;
 	std::vector<Entity> enemies;

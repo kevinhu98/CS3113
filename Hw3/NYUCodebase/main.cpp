@@ -24,7 +24,6 @@
 2. Enemys need to shoot back 
 3. Shoot Timer so that player cannot hold space
 4. Once all enemies are dead, reset
-
 */
 
 SDL_Window* displayWindow;
@@ -100,16 +99,11 @@ Matrix projectionMatrix;
 Matrix modelMatrix;
 Matrix viewMatrix;
 GLuint font;
-GLuint spriteSheetTexture;
 const Uint8 *keys = SDL_GetKeyboardState(NULL);
 SDL_Event event;
 GameMode mode;
 GameState gameState;
 bool done = false;
-
-SheetSprite Enemy = SheetSprite(spriteSheetTexture, 423.0f / 1024, 728.0f / 1024, 93.0f / 1024, 84.0f / 1024, 0.2);
-SheetSprite Player1 = SheetSprite(spriteSheetTexture, 211.0f / 1024, 941.0f / 1024, 93.0f / 1024, 84.0f / 1024, 0.2);
-SheetSprite Bullet = SheetSprite(spriteSheetTexture, 858.0f / 1024, 230.0f / 1024, 9.0f / 1024, 54.0 / 1024, 0.2);
 
 void TitleScreenInput() {
 	while (SDL_PollEvent(&event)) {
@@ -119,7 +113,7 @@ void TitleScreenInput() {
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE)  {
 				if (mode == STATE_GAME_OVER) {
-					gameState.Initialize(&Player1, &Bullet, &Enemy);
+					gameState.reset(); 
 				}
 				mode = STATE_GAME_LEVEL;
 			}
@@ -158,6 +152,7 @@ void Update(float elapsed) {
 		gameState.Update(elapsed);
 		break;
 	case STATE_GAME_OVER:
+		//gameState.Initialize(&Player1, &Bullet, &Enemy);
 		break;
 	}
 }
@@ -192,7 +187,7 @@ int main(int argc, char *argv[])
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	font = LoadTexture(RESOURCE_FOLDER"font.png");
-	spriteSheetTexture = LoadTexture(RESOURCE_FOLDER"ships.png");
+	GLuint spriteSheetTexture = LoadTexture(RESOURCE_FOLDER"ships.png");
 
 	SheetSprite Enemy = SheetSprite(spriteSheetTexture, 423.0f / 1024, 728.0f / 1024, 93.0f / 1024, 84.0f / 1024, 0.2);
 	SheetSprite Player1 = SheetSprite(spriteSheetTexture, 211.0f / 1024, 941.0f / 1024, 93.0f / 1024, 84.0f / 1024, 0.2);

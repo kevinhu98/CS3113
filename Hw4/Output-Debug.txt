@@ -1,0 +1,74 @@
+﻿'NYUCodebase.exe' (Win32): Loaded 'C:\Users\Kevin\Documents\Repos\Assignments\Hw3\Debug\NYUCodebase.exe'. Symbols loaded.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntdll.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\KernelBase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\opengl32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Users\Kevin\Documents\Repos\Assignments\Hw3\NYUCodebase\SDL2.dll'. Module was built without symbols.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp140d.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Users\Kevin\Documents\Repos\Assignments\Hw3\NYUCodebase\glew32.dll'. Module was built without symbols.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\gdi32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\gdi32full.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\advapi32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140d.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp_win.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sechost.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\rpcrt4.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbased.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sspicli.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\user32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cryptbase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\win32u.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\bcryptprimitives.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\imm32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\combase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ole32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\glu32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\oleaut32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shell32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cfgmgr32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\SHCore.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\windows.storage.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shlwapi.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel.appcore.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\powrprof.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\profapi.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\version.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmm.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmmbase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmmbase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmmbase.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\winmmbase.dll'
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\uxtheme.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msctf.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dwmapi.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_8b5e4d3ae5587a71\nvinit.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\ki126025.inf_amd64_639ca90a507a17dd\ig9icd32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Unloaded 'C:\Windows\System32\DriverStore\FileRepository\ki126025.inf_amd64_639ca90a507a17dd\ig9icd32.dll'
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\ki126025.inf_amd64_639ca90a507a17dd\ig9icd32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dxgi.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wtsapi32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\ResourcePolicyClient.dll'
+'NYUCodebase.exe' (Win32): Unloaded 'C:\Windows\System32\DriverStore\FileRepository\nvdm.inf_amd64_8b5e4d3ae5587a71\nvinit.dll'
+The thread 0x2bc8 has exited with code 0 (0x0).
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\ki126025.inf_amd64_639ca90a507a17dd\igc32.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\clbcatq.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\TextInputFramework.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\CoreUIComponents.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\CoreMessaging.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntmarta.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\WinTypes.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Loaded 'C:\Windows\SysWOW64\WinTypes.dll'. Cannot find or open the PDB file.
+'NYUCodebase.exe' (Win32): Unloaded 'C:\Windows\SysWOW64\WinTypes.dll'
+The thread 0x4de0 has exited with code 0 (0x0).
+The thread 0x3cec has exited with code 0 (0x0).
+The thread 0x214c has exited with code 0 (0x0).
+The thread 0x523c has exited with code 0 (0x0).
+The thread 0x1790 has exited with code 0 (0x0).
+The thread 0x4e2c has exited with code 0 (0x0).
+The thread 0x4008 has exited with code 0 (0x0).
+The thread 0x3eec has exited with code 0 (0x0).
+The program '[17520] NYUCodebase.exe' has exited with code 0 (0x0).

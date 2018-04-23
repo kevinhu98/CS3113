@@ -14,7 +14,7 @@ FlareMap::FlareMap() {
 	mapData = nullptr;
 	mapWidth = 0;
 	mapHeight = 0;
-	tileSize = 0.1;
+	tileSize = 0.2;
 }
 
 FlareMap::~FlareMap() {

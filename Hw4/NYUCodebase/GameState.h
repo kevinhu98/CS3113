@@ -22,7 +22,7 @@ public:
 	void CollideWithMapY(Entity& entity);
 
 	Entity* player;
-	std::vector<Entity> entities;
+	std::vector<Entity*> entities;
 	std::vector<SheetSprite> sheetSprites;
 	FlareMap* map;
 

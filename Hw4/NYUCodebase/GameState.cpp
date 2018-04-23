@@ -1,8 +1,8 @@
 #include "GameState.h"
 
-#define GRAVITY 1.0f;
-#define ACCELERATION 0.5f;
-#define FRICTION 0.6f;
+#define GRAVITY 1.0f
+#define ACCELERATION 0.5f
+#define FRICTION 0.6f
 
 GameState::GameState() {}
 
@@ -19,11 +19,13 @@ void GameState::Initialize(GameUtilities* utilities, FlareMap* map) {
 
 void GameState::placeEntity(std::string type, float x, float y) {
 	if (type == "PLAYER") {
-		entities.emplace_back(x, y, &sheetSprites[0], PLAYER);
-		player = &entities.back();
+		//entities.emplace_back(x, y, &sheetSprites[0], PLAYER);
+		player = new Entity(x, y, &sheetSprites[0], PLAYER);
+		entities.push_back(player);
 	}
 	else if (type == "ENEMY") {		
-		entities.emplace_back(x, y, &sheetSprites[0], ENEMY);
+		Entity* enemy = new Entity(x, y, &sheetSprites[0], PLAYER);
+		entities.push_back(enemy);
 	}
 }
 
@@ -52,12 +54,13 @@ void GameState::ProcessInput() {
 		}
 	}
 	const Uint8* keys = Utilities->keys;
-	//player->collidedBottom
-	if (player) {
+
+	if (player->collidedBottom) {
 		if (keys[SDL_SCANCODE_LEFT]) {
 			player->x_acceleration = -0.7f;
 		}
 		else if (keys[SDL_SCANCODE_RIGHT]) {
+
 			player->x_acceleration = 0.7f;
 		}
 	}
@@ -69,27 +72,26 @@ void GameState::ProcessInput() {
 			player->x_velocity = -1.0f;
 		}
 	}
+	
 }
 
 void GameState::Update(float elapsed) {
 	for (size_t i = 0; i < entities.size(); ++i) {
-		entities[i].update(elapsed);
+		entities[i]->update(elapsed);
 		
-		//entities[i].x_velocity = lerp(entities[i].x_velocity, 0.0f, elapsed * FRICTION);
 		//friction
-		float lerp3 = elapsed * FRICTION;
-		//entities[i].x_velocity = lerp(entities[i].x_velocity, 0.0f, lerp3);
+		entities[i]->x_velocity = lerp(entities[i]->x_velocity, 0.0f, elapsed * FRICTION);
 		//entities[i].y_velocity = lerp(entities[i].y_velocity, 0.0f, lerp3);
 
 		//acceleration
-		entities[i].x_velocity += entities[i].x_acceleration * elapsed;
+		entities[i]->x_velocity += entities[i]->x_acceleration * elapsed;
 		//entities[i].y_velocity += entities[i].y_acceleration * elapsed;
 
 		//gravity
 		//entities[i].y_velocity -= elapsed * GRAVITY;
 
 		//x-velo
-		entities[i].x_pos += entities[i].x_velocity * elapsed;
+		entities[i]->x_pos += entities[i]->x_velocity * elapsed;
 		//CollideWithMapX(entities[i]);
 
 		//y-velo
@@ -106,15 +108,16 @@ void GameState::Render() {
 
 	//transitions screen
 	viewMatrix.Identity();
-	viewMatrix.Translate(-player->x_pos, -player->y_pos, 0.0f);
-	program.SetViewMatrix(viewMatrix);
-	
+	if (player) {
+		viewMatrix.Translate(-player->x_pos, -player->y_pos, 0.0f);
+		program.SetViewMatrix(viewMatrix);
+	}
 	//render map
 	map->render(program);
 
 	//render entities
 	for (size_t i = 0; i < entities.size(); ++i) {
-		entities[i].render(program);
+		entities[i]->render(program);
 	}
 }
 

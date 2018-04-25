@@ -1,12 +1,12 @@
 #include "GameState.h"
-
+#include <unordered_set>
 #define GRAVITY 1.0f
 #define ACCELERATION 0.5f
 #define FRICTION 0.6f
 
 GameState::GameState() {}
-
-std::vector<int> solidTiles = { 0, 2, 18, 34};
+std::unordered_set<int> solidTiles = { 0,1,17,33 };
+//std::unordered_set<int> solidTiles = { 0, 1, 2, 3, 6, 16, 17, 18, 19, 32, 33, 34, 35, 100, 101};
 
 void GameState::Initialize(GameUtilities* utilities, FlareMap* map) {
 	this->Utilities = utilities;
@@ -37,7 +37,7 @@ void GameState::ProcessInput() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE && player->collidedBottom) {
-				player->y_velocity = 5.0f;
+				player->y_velocity = 2.0f;
 			}
 			//Alternate exit button
 			if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -81,24 +81,31 @@ void GameState::Update(float elapsed) {
 		
 		//friction
 		entities[i]->x_velocity = lerp(entities[i]->x_velocity, 0.0f, elapsed * FRICTION);
-		//entities[i].y_velocity = lerp(entities[i].y_velocity, 0.0f, lerp3);
+		entities[i]->y_velocity = lerp(entities[i]->y_velocity, 0.0f, elapsed * FRICTION);
 
 		//acceleration
 		entities[i]->x_velocity += entities[i]->x_acceleration * elapsed;
-		//entities[i].y_velocity += entities[i].y_acceleration * elapsed;
+		entities[i]->y_velocity += entities[i]->y_acceleration * elapsed;
 
 		//gravity
-		//entities[i].y_velocity -= elapsed * GRAVITY;
+		entities[i]->y_velocity -= elapsed * GRAVITY;
 
 		//x-velo
 		entities[i]->x_pos += entities[i]->x_velocity * elapsed;
-		//CollideWithMapX(entities[i]);
+		CollideWithMapX(*entities[i]);
 
 		//y-velo
-		//entities[i].y_pos += entities[i].y_velocity * elapsed;
-		//CollideWithMapY(entities[i]);
+		entities[i]->y_pos += entities[i]->y_velocity * elapsed;
+		CollideWithMapY(*entities[i]);
 	}
-	
+	if (player->x_pos - player->width / 2 < 0) {
+		player->x_velocity = 0;
+		player->x_pos = map->tileSize / 2;
+	}
+	else if (player->x_pos + player->width / 2 > (map->tileSize*map->mapWidth)) {
+		player->x_velocity = 0;
+		player->x_pos = map->tileSize*map->mapWidth - map->tileSize / 2;
+	}
 }
 
 void GameState::Render() {
@@ -121,44 +128,53 @@ void GameState::Render() {
 	}
 }
 
+bool GameState::ResolveCollisionInX(Entity& entity, int x, int y, float size) {
+	if (x < 0 || y < 0 || map->mapData[y][x] == 0 ||
+		solidTiles.find(map->mapData[y][x] - 1) == solidTiles.end()) {
+		return false;
+	}
+	//collided tile center
+	float tileCenter = (x * size) + (size / 2);
+	return entity.collisionInX(tileCenter, size);
+}
+
+bool GameState::ResolveCollisionInY(Entity& entity, int x, int y, float size) {
+	if (x < 0 || y < 0 || map->mapData[y][x] == 0 ||
+		solidTiles.find(map->mapData[y][x] - 1) == solidTiles.end()) {
+		return false;
+	}
+	//collided tile center
+	float tileCenter = (-y * size) - (size / 2);
+	return entity.collisionInY(tileCenter, size);
+}
+
 void GameState::CollideWithMapX(Entity& entity) {
 	if (entity.x_velocity > 0) {
-		int rightX, rightY;
+		//right collision
+		int rightX, rightY; //coordinates of right-line of entity
 		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos, rightX, rightY);
-		//check tile solid
-		if (map->mapData[rightY][rightX] == 0, 2, 18, 34) {
-			//get collision tile center
-			float tileCenter = rightX * map->tileSize + map->tileSize / 2;
-			entity.collisionInX(tileCenter, map->tileSize);
+		ResolveCollisionInX(entity, rightX, rightY, map->tileSize);
 		}
-	}
 	else {
-		int leftX, leftY;
+		//left collision
+		int leftX, leftY; //coordinates of left-line of entity
 		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos, leftX, leftY);
-		if (map->mapData[leftY][leftX] == 0, 2, 18, 34) {
-			float tileCenter = leftX * map->tileSize + map->tileSize / 2;
-			entity.collisionInX(tileCenter, map->tileSize);
+		ResolveCollisionInX(entity, leftX, leftY, map->tileSize);
 		}
-	}
 }
 
 void GameState::CollideWithMapY(Entity& entity) {
-	//two points on x of entity 
-	int entityP1 = map->getTileCoordinateXPos(entity.x_pos - entity.width / 3);
-	//int entityP2 = map->getTileCoordinateXPos(entity.x_pos - entity.width / 3);
-
+	int entityP1 = map->getTileCoordinateXPos(entity.x_pos - entity.width / 4);
+	int entityP2 = map->getTileCoordinateXPos(entity.x_pos + entity.width / 4);
 	if (entity.y_velocity > 0) {
 		int topY = map->getTileCoordinateYPos(entity.y_pos + entity.height / 2);
-		if (map->mapData[entityP1][topY] == 0, 2, 18, 34) {
-			float tileCenter = -topY * map->tileSize - map->tileSize / 2;
-			entity.collisionInY(tileCenter, map->tileSize);
+		if (!ResolveCollisionInY(entity, entityP1, topY, map->tileSize)){
+			ResolveCollisionInY(entity, entityP2, topY, map->tileSize);
 		}
 	}
 	else {
 		int botY = map->getTileCoordinateYPos(entity.y_pos - entity.height / 2);
-		if (map->mapData[entityP1][botY] == 0, 2, 18, 34) {
-			float tileCenter = -botY * map->tileSize - map->tileSize / 2;
-			entity.collisionInY(tileCenter, map->tileSize);
+		if (!ResolveCollisionInY(entity, entityP1, botY, map->tileSize))
+			ResolveCollisionInY(entity, entityP2, botY, map->tileSize);
 		}
 	}
-}

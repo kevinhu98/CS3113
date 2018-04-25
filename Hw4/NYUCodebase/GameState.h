@@ -21,6 +21,9 @@ public:
 	void CollideWithMapX(Entity& entity);
 	void CollideWithMapY(Entity& entity);
 
+	bool ResolveCollisionInX(Entity& entity, int x, int y, float size);
+	bool ResolveCollisionInY(Entity& entity, int x, int y, float size);
+
 	Entity* player;
 	std::vector<Entity*> entities;
 	std::vector<SheetSprite> sheetSprites;

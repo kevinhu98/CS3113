@@ -12,7 +12,6 @@ Entity::Entity(float x_pos, float y_pos, SheetSprite* sprite, EntityType type) :
 	height = sprite->size;
 	x_acceleration = 0;
 	y_acceleration = 0;
-	collidedBottom = true;
 }
 
 
@@ -33,7 +32,7 @@ void Entity::render(ShaderProgram &program) {
 }
 
 void Entity::update(float elapsed) {
-	collidedBottom = true;
+	collidedBottom = false;
 	collidedLeft = false;
 	collidedRight = false;
 	collidedTop = false;
@@ -60,7 +59,7 @@ bool Entity::collisionInX(float x, float otherWidth) {
 	collidedRight = x_pos + width / 2 < x + otherWidth / 2 && x_pos + width / 2 > x - otherWidth / 2;
 	if (collidedRight) {
 		x_velocity = 0;
-		float penetration = fabs((x_pos + width / 2) - (x - otherWidth));
+		float penetration = fabs((x_pos + width / 2) - (x - otherWidth/2)) ;
 		x_pos -= penetration + DELTA;
 	}
 
@@ -73,19 +72,18 @@ bool Entity::collisionInX(float x, float otherWidth) {
 	return (collidedLeft || collidedRight);
 }
 
-//maybe bool not necessary?
 bool Entity::collisionInY(float y, float otherHeight) {
-	collidedTop = y_pos - height / 2 < y + otherHeight / 2 && y_pos - height / 2 > y - otherHeight / 2;
-	collidedBottom = y_pos + height / 2 < y + otherHeight / 2 && y_pos + height / 2 > y - otherHeight / 2;
+	collidedTop = y_pos + height / 2 < y + otherHeight / 2 && y_pos + height / 2 > y - otherHeight / 2;
+	collidedBottom = y_pos - height / 2  < y + otherHeight / 2 && y_pos + height / 2 > y + otherHeight / 2; 
 	if (collidedTop) {
 		y_velocity = 0;
-		float penetration = fabs((y_pos + height / 2) - (y - otherHeight));
-		y_pos -= penetration + DELTA;
+		float penetration = fabs((y_pos + height / 2) - (y - otherHeight/2)) ;
+		y_pos -= penetration - DELTA;
 	}
 
 	if (collidedBottom) {
 		y_velocity = 0;
-		float penetration = fabs((y_pos + otherHeight / 2) - (y_pos - height / 2));
+		float penetration = fabs((y + otherHeight / 2) - (y_pos - height / 2));
 		y_pos += penetration + DELTA;
 	}
 

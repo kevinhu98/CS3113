@@ -10,8 +10,11 @@ Entity::Entity(float x_pos, float y_pos, SheetSprite* sprite, EntityType type) :
 	x_pos(x_pos), y_pos(y_pos), sprite(sprite), type(type), x_velocity(0), y_velocity(0) {
 	width = sprite->aspectRatio * sprite->size;
 	height = sprite->size;
-	x_acceleration = 0;
-	y_acceleration = 0;
+	
+
+	if (this->type == ENEMY) {
+		this->x_acceleration = 5;
+	}
 }
 
 

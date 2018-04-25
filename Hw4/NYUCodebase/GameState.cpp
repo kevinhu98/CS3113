@@ -1,6 +1,6 @@
 #include "GameState.h"
 #include <unordered_set>
-#define GRAVITY 1.0f
+#define GRAVITY 2.0f
 #define ACCELERATION 0.5f
 #define FRICTION 0.6f
 
@@ -24,7 +24,7 @@ void GameState::placeEntity(std::string type, float x, float y) {
 		entities.push_back(player);
 	}
 	else if (type == "ENEMY") {		
-		Entity* enemy = new Entity(x, y, &sheetSprites[0], PLAYER);
+		Entity* enemy = new Entity(x, y, &sheetSprites[0], ENEMY);
 		entities.push_back(enemy);
 	}
 }
@@ -97,7 +97,25 @@ void GameState::Update(float elapsed) {
 		//y-velo
 		entities[i]->y_pos += entities[i]->y_velocity * elapsed;
 		CollideWithMapY(*entities[i]);
+
+		//enemy movement
+		if (entities[i]->type == ENEMY) {
+			if (entities[i]->collidedLeft || entities[i]->collidedRight) {
+				entities[i]->x_acceleration *= -1;
+			}
+		}
+
+		//death / enemy collision
+		if (player->collisionEntity(entities[i]) && entities[i]->type == ENEMY) {
+			player->x_pos = map->tileSize / 2;
+			player->y_pos = 0.2;
+			player->x_velocity = 0;
+			
+		}
+		
+
 	}
+	//bounds check + keeps in bounds
 	if (player->x_pos - player->width / 2 < 0) {
 		player->x_velocity = 0;
 		player->x_pos = map->tileSize / 2;
@@ -106,6 +124,8 @@ void GameState::Update(float elapsed) {
 		player->x_velocity = 0;
 		player->x_pos = map->tileSize*map->mapWidth - map->tileSize / 2;
 	}
+
+	
 }
 
 void GameState::Render() {
@@ -164,11 +184,12 @@ void GameState::CollideWithMapX(Entity& entity) {
 }
 
 void GameState::CollideWithMapY(Entity& entity) {
-	int entityP1 = map->getTileCoordinateXPos(entity.x_pos - entity.width / 4);
-	int entityP2 = map->getTileCoordinateXPos(entity.x_pos + entity.width / 4);
+	int entityP1 = map->getTileCoordinateXPos(entity.x_pos - entity.width / 3);
+	int entityP2 = map->getTileCoordinateXPos(entity.x_pos + entity.width / 3);
+	
 	if (entity.y_velocity > 0) {
 		int topY = map->getTileCoordinateYPos(entity.y_pos + entity.height / 2);
-		if (!ResolveCollisionInY(entity, entityP1, topY, map->tileSize)){
+		if (!ResolveCollisionInY(entity, entityP1, topY, map->tileSize)) {
 			ResolveCollisionInY(entity, entityP2, topY, map->tileSize);
 		}
 	}

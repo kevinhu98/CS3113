@@ -36,7 +36,7 @@ void GameState::ProcessInput() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE && player->collidedBottom) {
-				player->y_velocity = 1.4f;
+				player->y_velocity = 3.0f;
 			}
 			//Alternate exit button
 			if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -170,34 +170,40 @@ void GameState::CollideWithMapX(Entity& entity) {
 	if (entity.x_velocity > 0) {
 		//right collision
 		int rightX, rightBottomY, rightTopY; //two points on right-line of entity
-		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos + entity.height/2.1, rightX, rightBottomY);
-		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos - entity.height/2.1, rightX, rightTopY);
-		//ResolveCollisionInX(entity, rightX, rightBottomY, map->tileSize);
-		ResolveCollisionInX(entity, rightX, rightTopY, map->tileSize);
+		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos + entity.height / 2.5, rightX, rightBottomY);
+		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos - entity.height / 2.5, rightX, rightTopY);
+		if (ResolveCollisionInX(entity, rightX, rightBottomY, map->tileSize) == false) {
+			ResolveCollisionInX(entity, rightX, rightTopY, map->tileSize);
+		}
 	}
 	else {
 		//left collision
 		int leftX, leftBottomY, leftTopY; //two points on left-line of entity
-		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos + entity.height / 2.1, leftX, leftBottomY);
-		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos - entity.height / 2.1, leftX, leftTopY);
-		//ResolveCollisionInX(entity, leftX, leftBottomY, map->tileSize);
-		ResolveCollisionInX(entity, leftX, leftTopY, map->tileSize);
+		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos + entity.height / 2.5, leftX, leftBottomY);
+		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos - entity.height / 2.5, leftX, leftTopY);
+		if (ResolveCollisionInX(entity, leftX, leftBottomY, map->tileSize) == false) {
+			ResolveCollisionInX(entity, leftX, leftTopY, map->tileSize);
 		}
+	}
 }
 
 void GameState::CollideWithMapY(Entity& entity) {
-	int entityP1 = map->getTileCoordinateXPos(entity.x_pos - entity.width / 3);
-	int entityP2 = map->getTileCoordinateXPos(entity.x_pos + entity.width / 3);
-	
+	// near left and right edges of entity -- makes sure that entity doesnt slip off edges unintentially
+	int leftEdge = map->getTileCoordinateXPos(entity.x_pos - entity.width / 2.5);
+	int rightEdge = map->getTileCoordinateXPos(entity.x_pos + entity.width / 2.5);
+
 	if (entity.y_velocity > 0) {
 		int topY = map->getTileCoordinateYPos(entity.y_pos + entity.height / 2);
-		if (!ResolveCollisionInY(entity, entityP1, topY, map->tileSize)) {
-			ResolveCollisionInY(entity, entityP2, topY, map->tileSize);
+		if (ResolveCollisionInY(entity, leftEdge, topY, map->tileSize) == false) {
+			ResolveCollisionInY(entity, rightEdge, topY, map->tileSize);
+
 		}
 	}
 	else {
 		int botY = map->getTileCoordinateYPos(entity.y_pos - entity.height / 2);
-		if (!ResolveCollisionInY(entity, entityP1, botY, map->tileSize))
-			ResolveCollisionInY(entity, entityP2, botY, map->tileSize);
+		if (ResolveCollisionInY(entity, leftEdge, botY, map->tileSize) == false) {
+			ResolveCollisionInY(entity, rightEdge, botY, map->tileSize);
+
 		}
 	}
+}

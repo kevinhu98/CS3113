@@ -19,7 +19,6 @@ void GameState::Initialize(GameUtilities* utilities, FlareMap* map) {
 
 void GameState::placeEntity(std::string type, float x, float y) {
 	if (type == "PLAYER") {
-		//entities.emplace_back(x, y, &sheetSprites[0], PLAYER);
 		player = new Entity(x, y, &sheetSprites[0], PLAYER);
 		entities.push_back(player);
 	}
@@ -37,7 +36,7 @@ void GameState::ProcessInput() {
 		}
 		else if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.scancode == SDL_SCANCODE_SPACE && player->collidedBottom) {
-				player->y_velocity = 2.0f;
+				player->y_velocity = 1.4f;
 			}
 			//Alternate exit button
 			if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -112,8 +111,6 @@ void GameState::Update(float elapsed) {
 			player->x_velocity = 0;
 			
 		}
-		
-
 	}
 	//bounds check + keeps in bounds
 	if (player->x_pos - player->width / 2 < 0) {
@@ -124,7 +121,8 @@ void GameState::Update(float elapsed) {
 		player->x_velocity = 0;
 		player->x_pos = map->tileSize*map->mapWidth - map->tileSize / 2;
 	}
-
+		
+	
 	
 }
 
@@ -171,15 +169,19 @@ bool GameState::ResolveCollisionInY(Entity& entity, int x, int y, float size) {
 void GameState::CollideWithMapX(Entity& entity) {
 	if (entity.x_velocity > 0) {
 		//right collision
-		int rightX, rightY; //coordinates of right-line of entity
-		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos, rightX, rightY);
-		ResolveCollisionInX(entity, rightX, rightY, map->tileSize);
-		}
+		int rightX, rightBottomY, rightTopY; //two points on right-line of entity
+		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos + entity.height/2.1, rightX, rightBottomY);
+		map->worldToTileCoordinates(entity.x_pos + entity.width / 2, entity.y_pos - entity.height/2.1, rightX, rightTopY);
+		//ResolveCollisionInX(entity, rightX, rightBottomY, map->tileSize);
+		ResolveCollisionInX(entity, rightX, rightTopY, map->tileSize);
+	}
 	else {
 		//left collision
-		int leftX, leftY; //coordinates of left-line of entity
-		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos, leftX, leftY);
-		ResolveCollisionInX(entity, leftX, leftY, map->tileSize);
+		int leftX, leftBottomY, leftTopY; //two points on left-line of entity
+		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos + entity.height / 2.1, leftX, leftBottomY);
+		map->worldToTileCoordinates(entity.x_pos - entity.width / 2, entity.y_pos - entity.height / 2.1, leftX, leftTopY);
+		//ResolveCollisionInX(entity, leftX, leftBottomY, map->tileSize);
+		ResolveCollisionInX(entity, leftX, leftTopY, map->tileSize);
 		}
 }
 

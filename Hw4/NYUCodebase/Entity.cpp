@@ -14,6 +14,7 @@ Entity::Entity(float x_pos, float y_pos, SheetSprite* sprite, EntityType type) :
 
 	if (this->type == ENEMY) {
 		this->x_acceleration = 5;
+		//this->x_velocity = 5;
 	}
 }
 
